@@ -56,6 +56,21 @@ app.put('/tasks/:id', (req, res) => {
   res.json(tasks[index]);
 });
 
+
+// Atualizar parcialmente a tarefa
+app.patch('/tasks/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  const task = tasks.find(t => t.id === parseInt(id));
+  if (!task) {
+    return res.status(404).json({ error: 'Tarefa não encontrada' });
+  }
+
+  Object.assign(task, updates); // Atualiza só os campos enviados
+  res.json(task);
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
