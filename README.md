@@ -17,6 +17,7 @@ TaskZenio é uma aplicação web leve para gerenciamento de tarefas, com foco em
 
 - Node.js
 - Express.js
+- Módulo nativo do Node.js fs para persistência simples em arquivo JSON
 
 ---
 
@@ -49,8 +50,13 @@ TaskZenio é uma aplicação web leve para gerenciamento de tarefas, com foco em
 
 ```
 taskzenio-app/
+├── public/
+│   └── css/
+│   └── js/
+│   └── index.html
 ├── src/
 │   └── app.js         # Arquivo principal com as rotas e lógica da API
+│   └── db.json        # Arquivo JSON que armazena as tarefas
 ├── test.http          # Arquivo para testar os endpoints no VSCode
 ├── package.json
 ├── .gitignore
@@ -92,8 +98,8 @@ taskzenio-app/
 
 ## Observações
 
-- Este projeto utiliza um array na memória para armazenar as tarefas, ou seja, os dados serão perdidos ao reiniciar o servidor.
-- Próximos passos incluem a integração com banco de dados para persistência.
+- Este projeto armazena as tarefas em um arquivo JSON (db.json), garantindo persistência dos dados mesmo após reiniciar o servidor.
+- Próximos passos incluem a integração com banco de dados apropriado.
 
 ---
 
