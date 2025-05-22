@@ -41,6 +41,21 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(newTask);
 });
 
+
+// Atualizar status da tarefa (ex: marcar como concluída)
+app.put('/tasks/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedTask = req.body;
+
+  const index = tasks.findIndex(t => t.id === parseInt(id));
+  if (index === -1) return res.status(404).json({ error: 'Tarefa não encontrada' });
+
+  // sobrescreve completamente a tarefa
+  tasks[index] = { id: parseInt(id), ...updatedTask };
+
+  res.json(tasks[index]);
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
