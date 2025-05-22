@@ -21,6 +21,26 @@ app.get('/tasks', (req, res) => {
   res.json(tasks);
 });
 
+
+// Criar nova tarefa
+app.post('/tasks', (req, res) => {
+  const { title } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ error: 'Título da tarefa é obrigatório' });
+  }
+
+  const newTask = {
+    id: tasks.length + 1,
+    title,
+    done: false,
+  };
+
+  tasks.push(newTask);
+
+  res.status(201).json(newTask);
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
