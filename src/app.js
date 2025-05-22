@@ -71,6 +71,21 @@ app.patch('/tasks/:id', (req, res) => {
   res.json(task);
 });
 
+
+// Deletar uma tarefa pelo id
+app.delete('/tasks/:id', (req, res) => {
+  const { id } = req.params;
+  const taskIndex = tasks.findIndex(t => t.id === parseInt(id));
+
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: 'Tarefa não encontrada' });
+  }
+
+  tasks.splice(taskIndex, 1); // Remove do array
+
+  res.status(204).send(); // 204 No Content: sucesso, sem corpo na resposta
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
